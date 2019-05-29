@@ -1,0 +1,18 @@
+main {
+	margin: 1rem auto 0 auto;
+	width: 80%;
+}
+
+@media(max-width: 768px) {
+	main {
+		width: 100%;
+	}
+}
+
+div {
+	width: 100%;
+}
+
+:host {
+	overflow: hidden !important;
+}

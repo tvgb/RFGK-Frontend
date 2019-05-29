@@ -1,0 +1,34 @@
+table {
+	width: 100%;
+}
+
+th {
+	background-color: whitesmoke;
+	font-size: 1.1em;
+	color: #292929;
+}
+
+td {
+	font-size: 1.0em;
+	color: #444444;
+
+}
+
+h1 {
+	text-align: center;
+	color: #292929;
+	font-weight: 300;
+	font-size: 1.8em;
+}
+
+.date-wrapper {
+	font-size: 1em;
+	font-weight: 300;
+	margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+	.hide-on-mobile {
+		display: none;
+	}
+}

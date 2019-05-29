@@ -1,0 +1,20 @@
+<div id="round-create-wrapper" >
+	<form (submit)="onAddRound(postForm)" #postForm="ngForm">
+		<mat-form-field>
+			<input matInput type="text" name="title" #title="ngModel" placeholder="Player" ngModel required minlength="5">
+			<mat-error *ngIf="title.invalid">Input is required (min length 5)</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput type="text" name="title" #title="ngModel" placeholder="Course" ngModel required minlength="5">
+			<mat-error *ngIf="title.invalid">Input is required (min length 5)</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput type="number" name="title" #title="ngModel" placeholder="Throws" ngModel required minlength="5">
+			<mat-error *ngIf="title.invalid">Input is required (min length 5)</mat-error>
+		</mat-form-field>
+
+		<button mat-raised-button color="accent" type="submit">SAVE ROUND</button>
+	</form>
+</div>

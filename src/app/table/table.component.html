@@ -1,0 +1,62 @@
+
+<div class="table-wrapper">
+
+	<table mat-table *ngIf="dataSource.length > 0" [dataSource]="dataSource">
+
+		<tr mat-header-row *matHeaderRowDef= "!(isHandset$ | async) ? displayedColumns : displayedColumnsMobile" ></tr>
+		<tr mat-row *matRowDef="let row; columns: !(isHandset$ | async) ? displayedColumns : displayedColumnsMobile;"></tr>
+
+		<!-- Position Column -->
+		<ng-container matColumnDef="position">
+			<th  mat-header-cell *matHeaderCellDef> Pos. </th>
+			<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round; let i = index;"> {{ i + 1 }}. </td>
+		</ng-container>
+
+		<!-- First name Column -->
+		<ng-container matColumnDef="first_name">
+			<th  mat-header-cell *matHeaderCellDef> Fornavn </th>
+			<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{round.Player.first_name}} </td>
+		</ng-container>
+
+		<!-- Last name Column -->
+		<ng-container matColumnDef="last_name">
+			<th mat-header-cell *matHeaderCellDef> Etternavn </th>
+			<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{round.Player.last_name}} </td>
+		</ng-container>
+
+		<!-- Course Column -->
+		<ng-container matColumnDef="course">
+			<th mat-header-cell *matHeaderCellDef> Bane </th>
+			<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{round.Course.course_name}} </td>
+		</ng-container>
+
+		<!-- Date Column -->
+		<ng-container matColumnDef="date">
+			<th mat-header-cell *matHeaderCellDef> Dato </th>
+			<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{round.date}} </td>
+		</ng-container>
+
+		<!-- Par Column -->
+		<ng-container matColumnDef="par">
+			<th mat-header-cell *matHeaderCellDef> Par </th>
+			<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{round.Course.par}} </td>
+		</ng-container>
+
+		<!-- Throws Column -->
+		<ng-container matColumnDef="number_of_throws">
+			<th mat-header-cell *matHeaderCellDef> Kast </th>
+			<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{round.throws}} </td>
+		</ng-container>
+
+		<!-- Date Column -->
+		<ng-container matColumnDef="score">
+				<th mat-header-cell *matHeaderCellDef> Sum </th>
+				<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{
+					getSum(round)
+				}} </td>
+		</ng-container>
+	</table>
+</div>
+
+
+

@@ -1,0 +1,49 @@
+<mat-toolbar>
+	<span id="title" >Rønvik Frisbeegolf</span>
+
+	<!-- This fills the remaining space of the current row -->
+	<span class="example-fill-remaining-space"></span>
+
+	<span class="nav-item">
+		<a [routerLink]="['/rounds']" routerLinkActive="router-link-active" >Siste</a>
+	</span>
+
+	<span class="nav-item">
+		<a [routerLink]="['/posts']" routerLinkActive="router-link-active" >Posts</a>
+	</span>
+
+	<span class="nav-item">
+		<a [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</a>
+	</span>
+
+	<span class="nav-item">
+			<a [routerLink]="['/create-scorecard']" routerLinkActive="router-link-active" >Create Scorecard</a>
+		</span>
+
+	<button
+		id="toggle-dropdown-button"
+		type="button"
+		mat-icon-button
+		(click)="toggleDropdown()">
+		<mat-icon>menu</mat-icon>
+	</button>
+
+</mat-toolbar>
+
+<div class="dropdown" [ngClass]="{ showDropdown: showDropdown }">
+	<span class="dropdown-nav-item">
+		<a [routerLink]="['/rounds']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Siste</a>
+	</span>
+
+	<span class="dropdown-nav-item">
+		<a [routerLink]="['/posts']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Posts</a>
+	</span>
+
+	<span class="dropdown-nav-item">
+		<a [routerLink]="['/login']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Login</a>
+	</span>
+
+	<span class="dropdown-nav-item">
+		<a [routerLink]="['/create-scorecard']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Create Scorecard</a>
+	</span>
+</div>

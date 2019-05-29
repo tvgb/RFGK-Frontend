@@ -1,0 +1,76 @@
+mat-toolbar {
+	background-color: #292929;
+	height: 50px;
+	margin-bottom: 2rem;
+}
+
+a {
+	text-decoration: none;
+	margin: 0 0.5rem;
+	color: #777777;
+	font-weight: 350;
+}
+
+.router-link-active {
+	color: whitesmoke;
+}
+
+.example-fill-remaining-space {
+	/* This fills the remaining space, by using flexbox.
+	   Every toolbar row uses a flexbox row layout. */
+	flex: 1 1 auto;
+}
+
+#title {
+	color: white;
+	font-weight: 350;
+}
+
+mat-icon {
+	color: white;
+}
+
+.dropdown {
+	max-height: 0;
+	transition: max-height 4s ease-out;
+	width: 100%;
+	display: none;
+	background-color: #292929;
+	overflow: hidden;
+}
+
+#toggle-dropdown-button {
+	display: none;
+}
+
+/* For phones or very slim screens */
+@media (max-width: 768px) {
+	mat-toolbar {
+		margin-bottom: 0;
+	}
+
+	#toggle-dropdown-button {
+		display: block;
+	}
+
+	.showDropdown, span {
+		display: block;
+		max-height: 400px;
+		transition: max-height 4s ease-in;
+	}
+
+	span {
+		display: flex;
+		align-items: flex-end;
+		padding: 1rem;
+	}
+
+	a {
+		margin-left: auto;
+	}
+
+	.nav-item {
+		display: none;
+	}
+
+}

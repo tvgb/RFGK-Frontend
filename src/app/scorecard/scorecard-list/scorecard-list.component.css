@@ -1,0 +1,38 @@
+.scorecard-wrapper {
+	margin-top: 5rem;
+}
+
+h1 {
+	font-size: 2em;
+	text-align: center;
+	margin-bottom: -1rem;
+	font-weight: 300;
+}
+
+.name-wrapper, .date-wrapper {
+	font-weight: 300;
+	margin: 0.5em 1em;
+}
+
+.name-wrapper {
+	float: left;
+}
+
+.date-wrapper {
+	float: right;
+}
+
+@media(max-width: 768px) {
+	.scorecard-wrapper {
+		margin-top: 2rem;
+	}
+
+	.name-wrapper {
+		display: none;
+	}
+
+	.date-wrapper {
+		float: none;
+		text-align: center;
+	}
+}

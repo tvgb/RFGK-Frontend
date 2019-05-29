@@ -1,0 +1,5 @@
+<h1 class="mat-h1" >Siste runder</h1>
+<div class="scorecard-wrapper"  *ngFor="let scorecard of scorecards" >
+	<app-table [rounds]="scorecard.Rounds"></app-table>
+	<div class="name-wrapper" *ngIf="scorecards.length > 0"> Opprettet av {{scorecard.Player.first_name}} {{scorecard.Player.last_name}} </div> <div class="date-wrapper">{{scorecard.date_time | date : "dd'.' MMMM yyyy 'kl.' HH:mm"}} </div>
+</div>

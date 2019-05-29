@@ -1,0 +1,18 @@
+<div id="scorecard-create-wrapper" >
+	<form (submit)="onAddScorecard(postForm)" #postForm="ngForm">
+		<mat-form-field>
+			<input matInput type="datetime-local" name="title" #title="ngModel" placeholder="Dato" ngModel required minlength="5">
+			<mat-error *ngIf="title.invalid">Input is required (min length 5)</mat-error>
+		</mat-form-field>
+
+
+
+		<button mat-raised-button color="accent" type="submit">SAVE POST</button>
+	</form>
+
+	<app-round-create></app-round-create>
+</div>
+
+<div id="round-list-wrapper">
+
+</div>
