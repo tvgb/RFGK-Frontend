@@ -1,7 +1,7 @@
 
 <div class="table-wrapper">
 
-	<table mat-table *ngIf="dataSource.length > 0" [dataSource]="dataSource">
+	<table appHoldable (holdTime)="deleteScorecard($event)" mat-table *ngIf="dataSource.length > 0" [dataSource]="dataSource">
 
 		<tr mat-header-row *matHeaderRowDef= "!(isHandset$ | async) ? displayedColumns : displayedColumnsMobile" ></tr>
 		<tr mat-row *matRowDef="let row; columns: !(isHandset$ | async) ? displayedColumns : displayedColumnsMobile;"></tr>
@@ -50,12 +50,14 @@
 
 		<!-- Date Column -->
 		<ng-container matColumnDef="score">
-				<th mat-header-cell *matHeaderCellDef> Sum </th>
-				<td [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{
+				<th class="sum-col-header" mat-header-cell *matHeaderCellDef> Sum </th>
+				<td class="sum-col" [ngStyle]="{'background-color': getColor(round)}" mat-cell *matCellDef="let round"> {{
 					getSum(round)
 				}} </td>
 		</ng-container>
 	</table>
+	<mat-progress-bar *ngIf="deleteProgress > 0 && isAdmin" [value]="deleteProgress" mode="determinate" color="warn"></mat-progress-bar>
+
 </div>
 
 

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ScorecardListComponent } from './scorecard/scorecard-list/scorecard-list.component';
-import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { LoginComponent } from './login/login.component';
 import { ScorecardCreateComponent } from './scorecard/scorecard-create/scorecard-create.component';
+import { AuthGuard } from './guards/auth.gard';
 
 const routes: Routes = [
 	{
@@ -11,11 +11,9 @@ const routes: Routes = [
 	}, {
    		path: 'rounds', component: ScorecardListComponent
 	}, {
-		path: 'posts', component: PostCreateComponent
-	}, {
 		path: 'login', component: LoginComponent
 	}, {
-		path: 'create-scorecard', component: ScorecardCreateComponent
+		path: 'create-scorecard', component: ScorecardCreateComponent, canActivate: [AuthGuard]
 	}
 ];
 

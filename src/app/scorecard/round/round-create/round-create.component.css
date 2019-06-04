@@ -1,3 +1,26 @@
 mat-form-field {
 	width: 100%;
 }
+
+mat-slider {
+	width: 70%;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+#slider-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#score-text {
+	color: #757575;
+}
+
+#score-value {
+	font-size: 1.2em;
+	margin-right: 5px;
+	text-align: right;
+	width: 2em;
+}

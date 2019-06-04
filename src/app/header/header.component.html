@@ -9,16 +9,8 @@
 	</span>
 
 	<span class="nav-item">
-		<a [routerLink]="['/posts']" routerLinkActive="router-link-active" >Posts</a>
-	</span>
-
-	<span class="nav-item">
 		<a [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</a>
 	</span>
-
-	<span class="nav-item">
-			<a [routerLink]="['/create-scorecard']" routerLinkActive="router-link-active" >Create Scorecard</a>
-		</span>
 
 	<button
 		id="toggle-dropdown-button"
@@ -36,14 +28,6 @@
 	</span>
 
 	<span class="dropdown-nav-item">
-		<a [routerLink]="['/posts']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Posts</a>
-	</span>
-
-	<span class="dropdown-nav-item">
 		<a [routerLink]="['/login']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Login</a>
-	</span>
-
-	<span class="dropdown-nav-item">
-		<a [routerLink]="['/create-scorecard']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Create Scorecard</a>
 	</span>
 </div>

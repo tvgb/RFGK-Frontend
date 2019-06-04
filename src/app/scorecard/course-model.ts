@@ -1,6 +1,7 @@
 
 export interface ICourse {
-	course_name: string;
+	id: number;
+	name: string;
 	holes: number;
 	par: number;
 }

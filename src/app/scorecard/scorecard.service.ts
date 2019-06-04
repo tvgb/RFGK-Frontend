@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IScorecard } from './scorecard-model';
-import { stringify } from '@angular/compiler/src/util';
-import { Observable } from 'rxjs';
+import { Observable, from, throwError, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class ScorecardService {
 	private http: HttpClient;
+
+	private deleteActivated: boolean = false;
+	private deleteActivatedUpdated = new Subject<boolean>();
 
 	constructor(http: HttpClient) {
 		this.http = http;
@@ -15,5 +18,36 @@ export class ScorecardService {
 	getScorecards(): Observable<IScorecard[]> {
 		//return this.http.get<IScorecard[]>('https://www.xn--rnvikfrisbeegolf-lxb.no/scorecard');
 		return this.http.get<IScorecard[]>('http://localhost:3000/scorecard');
+	}
+
+	addScorecard(scorecard: IScorecard): Observable<IScorecard> {
+		console.log('Posting scorecard in service.');
+		return this.http.post<IScorecard>('http://localhost:3000/scorecard', scorecard)
+		.pipe(
+			catchError(this.handleError)
+		);
+	}
+
+	deleteScorecard(scorecardId: number): Observable<IScorecard> {
+		return this.http.delete<IScorecard>(`http://localhost:3000/scorecard/${scorecardId}`)
+		.pipe(
+			catchError(this.handleError)
+		);
+	}
+
+	private handleError(error: HttpErrorResponse) {
+		if (error.error instanceof ErrorEvent) {
+		  // A client-side or network error occurred. Handle it accordingly.
+		  console.error('An error occurred:', error.error.message);
+		} else {
+		  // The backend returned an unsuccessful response code.
+		  // The response body may contain clues as to what went wrong,
+		  console.error(
+			`Backend returned code ${error.status}, ` +
+			`body was: ${error.error}`);
+		}
+
+		// return an observable with a user-facing error message
+		return throwError('Something bad happened; please try again later.');
 	}
 }

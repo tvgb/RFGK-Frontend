@@ -1,3 +1,20 @@
-<p>
-  round-list works!
-</p>
+<div id="rounds-listed-wrapper">
+	<div class="round-card" *ngFor="let round of rounds">
+		<div class="card-content-wrapper">
+			<div class="first-name">
+				{{ round.Player.first_name }}
+				&nbsp;
+			</div>
+			<div class="last-name">
+				{{ round.Player.last_name }}
+			</div>
+			&nbsp;	&nbsp; | &nbsp;	&nbsp;
+			<div class="score">
+				Resultat: {{ round.throws - round.Course.par }}
+			</div>
+			<div class="spacer"></div>
+			<i (click)="removeRound(round)" class="fa fa-trash" color="accent"></i>
+		</div>
+	</div>
+</div>
+
