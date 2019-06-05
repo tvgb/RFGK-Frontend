@@ -1,4 +1,4 @@
 export const environment = {
   	production: true,
-  	apiEndpoint: 'https://158.38.166.221/api'
+  	apiEndpoint: 'https://xn--rnvikfrisbeegolf-lxb.no/api'
 };
