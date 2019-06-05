@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { IPlayer } from '../player-model';
 import { IRound } from '../../table/round-model';
 import { ICourse } from '../course-model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class RoundService {
@@ -11,6 +12,7 @@ export class RoundService {
 	private http: HttpClient;
 	private rounds: IRound[] = [];
 	private roundsUpdated = new Subject<IRound[]>();
+	private apiEndpoint = environment.apiEndpoint;
 
 	constructor(http: HttpClient) {
 		this.http = http;
@@ -61,10 +63,10 @@ export class RoundService {
 	}
 
 	getPlayers(): Observable<IPlayer[]> {
-		return this.http.get<IPlayer[]>('http://localhost:3000/players');
+		return this.http.get<IPlayer[]>(`${this.apiEndpoint}/players`);
 	}
 
 	getCourses(): Observable<ICourse[]> {
-		return this.http.get<ICourse[]>('http://localhost:3000/courses');
+		return this.http.get<ICourse[]>(`${this.apiEndpoint}/courses`);
 	}
 }

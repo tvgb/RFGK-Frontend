@@ -3,33 +3,31 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IScorecard } from './scorecard-model';
 import { Observable, from, throwError, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class ScorecardService {
 	private http: HttpClient;
-
-	private deleteActivated: boolean = false;
-	private deleteActivatedUpdated = new Subject<boolean>();
+	private apiEndpoint = environment.apiEndpoint;
 
 	constructor(http: HttpClient) {
 		this.http = http;
 	}
 
 	getScorecards(): Observable<IScorecard[]> {
-		//return this.http.get<IScorecard[]>('https://www.xn--rnvikfrisbeegolf-lxb.no/scorecard');
-		return this.http.get<IScorecard[]>('http://localhost:3000/scorecard');
+		return this.http.get<IScorecard[]>(`${this.apiEndpoint}/scorecard`);
 	}
 
 	addScorecard(scorecard: IScorecard): Observable<IScorecard> {
 		console.log('Posting scorecard in service.');
-		return this.http.post<IScorecard>('http://localhost:3000/scorecard', scorecard)
+		return this.http.post<IScorecard>(`${this.apiEndpoint}/scorecard`, scorecard)
 		.pipe(
 			catchError(this.handleError)
 		);
 	}
 
 	deleteScorecard(scorecardId: number): Observable<IScorecard> {
-		return this.http.delete<IScorecard>(`http://localhost:3000/scorecard/${scorecardId}`)
+		return this.http.delete<IScorecard>(`${this.apiEndpoint}/scorecard/${scorecardId}`)
 		.pipe(
 			catchError(this.handleError)
 		);
