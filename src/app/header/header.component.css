@@ -45,8 +45,13 @@ mat-icon {
 
 /* For phones or very slim screens */
 @media (max-width: 768px) {
+
 	mat-toolbar {
 		margin-bottom: 0;
+	}
+
+	#title {
+		padding-left: 0;
 	}
 
 	#toggle-dropdown-button {
@@ -56,7 +61,7 @@ mat-icon {
 	.showDropdown, span {
 		display: block;
 		max-height: 400px;
-		transition: max-height 4s ease-in;
+		transition: max-height 0.5s ease-in-out;
 	}
 
 	span {
@@ -71,6 +76,11 @@ mat-icon {
 
 	.nav-item {
 		display: none;
+	}
+
+	span.dropdown-nav-item {
+		padding: 0 1rem 1rem 0;
+		font-size: 1.2rem;
 	}
 
 }

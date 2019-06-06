@@ -17,7 +17,8 @@ import { MatInputModule,
 		MatNativeDateModule,
 		MatSliderModule,
 		MatProgressSpinnerModule,
-		MatProgressBarModule} from '@angular/material';
+		MatProgressBarModule,
+		MatSnackBarModule} from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
@@ -77,7 +78,8 @@ registerLocaleData(localeNb, 'nb');
 		MatMomentDateModule,
 		MatSliderModule,
 		MatProgressSpinnerModule,
-		MatProgressBarModule
+		MatProgressBarModule,
+		MatSnackBarModule
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: 'nb' },

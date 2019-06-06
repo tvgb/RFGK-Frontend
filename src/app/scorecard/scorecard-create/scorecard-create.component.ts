@@ -8,6 +8,7 @@ import { Response } from 'selenium-webdriver/http';
 import { IcuPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { IPlayer } from '../player-model';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ScorecardCreateComponent implements OnInit {
 	rounds: IRound[] = [];
 	private roundsSubscription: Subscription;
 
-	constructor(private router: Router, private roundService: RoundService, private scorecardService: ScorecardService) {}
+// tslint:disable-next-line: max-line-length
+	constructor(private snackBar: MatSnackBar, private router: Router, private roundService: RoundService, private scorecardService: ScorecardService) {}
 
 	ngOnInit() {
 		this.roundService.removeAllRounds();
@@ -51,8 +53,14 @@ export class ScorecardCreateComponent implements OnInit {
 		this.scorecardService.addScorecard(newScorecard).subscribe( res => {
 		}, error => {
 			console.log(`Error: ${error}`);
+			return;
 		});
 
 		this.roundService.removeAllRounds();
+
+		this.snackBar.open('Runden ble lagret i systemet.', 'OK', {
+			duration: 5000,
+		});
+
 	}
 }
