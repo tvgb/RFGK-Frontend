@@ -3,11 +3,15 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
 
 	apiEndpoint = environment.apiEndpoint;
+	private SESSION_STORAGE_VARIABLE = 'currentUser';
+	private jwtHelper = new JwtHelperService();
+
 
 	constructor(private http: HttpClient) { }
 
@@ -31,6 +35,19 @@ export class AuthenticationService {
 	logout() {
 		// remove user from local storage to log user out
 		sessionStorage.removeItem('currentUser');
+	}
+
+	getToken(): string {
+		return JSON.parse(sessionStorage.getItem(this.SESSION_STORAGE_VARIABLE)).token || null;
+	}
+
+	isTokenExpired(): boolean {
+		const storedValue = JSON.parse(sessionStorage.getItem(this.SESSION_STORAGE_VARIABLE));
+
+		if (!storedValue) { return true; }
+		if (!storedValue.token) { return true; }
+
+		return this.jwtHelper.isTokenExpired(storedValue.token);
 	}
 
 	isAdmin(playerId: number): Observable<boolean> {

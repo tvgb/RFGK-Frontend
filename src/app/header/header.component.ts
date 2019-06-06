@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
 
 	showDropdown = false;
+	isLoggedIn = false;
 
 	isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
 		.pipe(

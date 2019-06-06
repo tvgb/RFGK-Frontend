@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Response } from 'selenium-webdriver/http';
 import { IcuPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { IPlayer } from '../player-model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ScorecardCreateComponent implements OnInit {
 	rounds: IRound[] = [];
 	private roundsSubscription: Subscription;
 
-	constructor(public roundService: RoundService, public scorecardService: ScorecardService) {}
+	constructor(private router: Router, private roundService: RoundService, private scorecardService: ScorecardService) {}
 
 	ngOnInit() {
 		this.roundService.removeAllRounds();
@@ -31,7 +32,14 @@ export class ScorecardCreateComponent implements OnInit {
 	}
 
 	createScorecard() {
-		const player = JSON.parse(sessionStorage.getItem('currentUser')).player;
+		const storedValue = JSON.parse(sessionStorage.getItem('currentUser'));
+
+		if (!(storedValue && storedValue.player)) {
+			this.router.navigate(['/login']);
+			return;
+		}
+
+		const player = storedValue.player;
 
 		const newScorecard: IScorecard = {
 			id: -1,

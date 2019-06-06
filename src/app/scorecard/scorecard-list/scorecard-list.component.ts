@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IScorecard } from '../scorecard-model';
 import { ScorecardService } from '../scorecard.service';
-import { DatePipe } from '@angular/common';
-import { AuthenticationService } from 'src/app/login/authentication.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-scorecard',
@@ -10,24 +9,37 @@ import { AuthenticationService } from 'src/app/login/authentication.service';
 	styleUrls: ['./scorecard-list.component.css']
 })
 
-export class ScorecardListComponent implements OnInit {
+export class ScorecardListComponent implements OnInit, OnDestroy {
 
 	scorecards: IScorecard[] = [];
-	deleteActive: boolean = false;
+	private scorecardSubscription: Subscription;
 
-	constructor(private authenticationService: AuthenticationService,
-				private scorecardService: ScorecardService,
-				private datePipe: DatePipe) { }
+	constructor(private scorecardService: ScorecardService) { }
 
 	ngOnInit() {
-		this.getScorecards();
+		this.scorecardService.getScorecards()
+			.subscribe((scorecards: IScorecard[]) => {
+				this.scorecards = scorecards;
+			});
+
+
+		this.scorecardSubscription = this.scorecardService.getScorecardDeletedIdListener()
+			.subscribe((scorecardId: number) => {
+				let scorecardIndex = -1;
+				for (let i = 0; i < this.scorecards.length; i++) {
+					if (this.scorecards[i].id === scorecardId) {
+						scorecardIndex = i;
+						break;
+					}
+				}
+
+				if (scorecardIndex >= 0) {
+					this.scorecards.splice(scorecardIndex, 1);
+				}
+			});
 	}
 
-	getScorecards() {
-		this.scorecardService.getScorecards()
-			.subscribe(data => {
-				this.scorecards = data;
-				console.log(this.scorecards);
-			});
+	ngOnDestroy() {
+		this.scorecardSubscription.unsubscribe();
 	}
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,6 +38,7 @@ import { AuthenticationService } from './login/authentication.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthGuard } from './guards/auth.gard';
 import { HoldableDirective } from './holdable.directive';
+import { AuthErrorHandler } from './helpers/auth-error-handler';
 
 registerLocaleData(localeNb, 'nb');
 
@@ -80,6 +81,10 @@ registerLocaleData(localeNb, 'nb');
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: 'nb' },
+		{
+			provide: ErrorHandler,
+			useClass: AuthErrorHandler
+		},
 		ScorecardService,
 		DatePipe,
 		AuthenticationService,

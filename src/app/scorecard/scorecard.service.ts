@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IScorecard } from './scorecard-model';
 import { Observable, from, throwError, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class ScorecardService {
 	private http: HttpClient;
 	private apiEndpoint = environment.apiEndpoint;
+	private scorecardDeletedId = new Subject<number>();
 
 	constructor(http: HttpClient) {
 		this.http = http;
@@ -16,6 +17,10 @@ export class ScorecardService {
 
 	getScorecards(): Observable<IScorecard[]> {
 		return this.http.get<IScorecard[]>(`${this.apiEndpoint}/scorecard`);
+	}
+
+	getScorecardDeletedIdListener() {
+		return this.scorecardDeletedId.asObservable();
 	}
 
 	addScorecard(scorecard: IScorecard): Observable<IScorecard> {
@@ -26,11 +31,14 @@ export class ScorecardService {
 		);
 	}
 
-	deleteScorecard(scorecardId: number): Observable<IScorecard> {
-		return this.http.delete<IScorecard>(`${this.apiEndpoint}/scorecard/${scorecardId}`)
+	deleteScorecard(scorecardId: number): Observable<any> {
+		const obs = this.http.delete<any>(`${this.apiEndpoint}/scorecard/${scorecardId}`)
 		.pipe(
 			catchError(this.handleError)
 		);
+
+		this.scorecardDeletedId.next(scorecardId);
+		return obs;
 	}
 
 	private handleError(error: HttpErrorResponse) {

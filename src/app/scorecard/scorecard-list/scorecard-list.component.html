@@ -6,7 +6,14 @@
 	</a>
 </div>
 
-<div class="scorecard-wrapper"  *ngFor="let scorecard of scorecards" >
-	<app-table [rounds]="scorecard.Rounds"></app-table>
-	<div class="name-wrapper" *ngIf="scorecards.length > 0"> Opprettet av {{scorecard.Player.first_name}} {{scorecard.Player.last_name}} </div> <div class="date-wrapper">Fra {{scorecard.date_time | date : "dd'.' MMMM yyyy"}} </div>
+<div *ngFor="let scorecard of scorecards" class="scorecard-wrapper" >
+	<div>
+		<app-table [rounds]="scorecard.Rounds"></app-table>
+		<div class="name-wrapper">
+			Opprettet av {{scorecard.Player.first_name}} {{scorecard.Player.last_name}}
+		</div>
+		<div class="date-wrapper">
+			Fra {{scorecard.date_time | date : "dd'.' MMMM yyyy"}}
+		</div>
+	</div>
 </div>
