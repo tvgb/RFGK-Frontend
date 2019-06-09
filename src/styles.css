@@ -5,3 +5,7 @@ body {
 	margin: 0;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+h1 {
+	font-size: 2em;
+	font-weight: 300;
+}
