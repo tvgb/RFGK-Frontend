@@ -1,0 +1,19 @@
+#register-wrapper {
+	width: 400px;
+	margin: auto;
+}
+
+mat-form-field {
+	width: 100%;
+	margin-bottom: 0.7rem;
+}
+
+
+
+
+
+@media(max-width: 768px) {
+	#register-wrapper {
+		width: 100%;
+	}
+}

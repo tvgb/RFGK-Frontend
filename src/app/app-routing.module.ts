@@ -4,6 +4,7 @@ import { ScorecardListComponent } from './scorecard/scorecard-list/scorecard-lis
 import { LoginComponent } from './login/login.component';
 import { ScorecardCreateComponent } from './scorecard/scorecard-create/scorecard-create.component';
 import { AuthGuard } from './guards/auth.gard';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
 	{
@@ -14,6 +15,8 @@ const routes: Routes = [
 		path: 'login', component: LoginComponent
 	}, {
 		path: 'create-scorecard', component: ScorecardCreateComponent, canActivate: [AuthGuard]
+	}, {
+		path: 'register', component: RegisterComponent
 	}
 ];
 

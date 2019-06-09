@@ -1,0 +1,68 @@
+<div id="register-wrapper">
+	<h1>Registrer</h1>
+
+	<form [formGroup]="registerForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+
+		<mat-form-field>
+			<mat-label>Fornavn</mat-label>
+			<input matInput type="text" formControlName="firstName" placeholder="Ola" required/>
+			<mat-error *ngIf="registerForm.controls['firstName'].invalid">Skriv in fornavn.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Etternavn</mat-label>
+			<input matInput type="text" formControlName="lastName" placeholder="Normann" required/>
+			<mat-error *ngIf="registerForm.controls['lastName'].invalid">Skriv in etternavn.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Fødselsdato</mat-label>
+			<input matInput [matDatepicker]="datePicker" formControlName="birthday" placeholder="01.01.1997" required>
+			<mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+			<mat-datepicker #datePicker></mat-datepicker>
+			<mat-error *ngIf="registerForm.controls['birthday'].invalid">Du må legge til en fødselsdato.</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Epostadresse</mat-label>
+			<input matInput type="text" formControlName="email" placeholder="olanormann69@yahoo.com" required>
+			<mat-error *ngIf="e() === 'email'">
+				Skriv inn en gyldig epostadresse.
+			</mat-error>
+			<mat-error *ngIf="e() === 'required'">
+				Skriv inn en epostadresse.
+			</mat-error>
+			<mat-error *ngIf="e() === 'alreadyTaken'">
+				Epostadressen er allerede i bruk.
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label for="password">Passord</mat-label>
+			<input matInput type="password" formControlName="password" placeholder="passord123456" required minlength="6"/>
+			<mat-error *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].errors.minlength">
+				Passordet må minst ha 6 tegn.
+			</mat-error>
+			<mat-error *ngIf="registerForm.controls['password'].invalid && !registerForm.controls['password'].errors.minlength">
+				Skriv inn et passord.
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Hemmelig kode</mat-label>
+			<input matInput type="text" formControlName="secret_code" placeholder="wowsecretcode!" required/>
+			<mat-error *ngIf="registerForm.controls['secret_code'].invalid  && !registerForm.controls['secret_code'].errors.wrongcode">
+				Skriv inn hemmelig kode.
+			</mat-error>
+			<mat-error *ngIf="registerForm.controls['secret_code'].invalid && registerForm.controls['secret_code'].errors.wrongcode">
+				Feil hemmelig kode.
+			</mat-error>
+		</mat-form-field>
+
+		<div id="register-button-wrapper">
+			<button id="register-button" mat-raised-button color="accent" type="submit">Registrer</button>
+		</div>
+
+	</form>
+
+</div>

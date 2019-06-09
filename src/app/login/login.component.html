@@ -17,7 +17,7 @@
 			<button id="login-button" [disabled]="loading" mat-raised-button color="accent" type="submit">Login</button>
 			<mat-spinner *ngIf="loading" color="accent" [diameter]="40"></mat-spinner>
 		</div>
-		<h3 class="mat-h3">Ikke laget/fått bruker?</h3>
-		<button disabled mat-raised-button color="accent" id="router-link-button" [routerLink]="['/register']">Registrer</button>
+		<h3 class="mat-h3">Ingen bruker?</h3>
+		<button mat-raised-button color="accent" id="router-link-button" [routerLink]="['/register']">Registrer</button>
 	</form>
 </div>

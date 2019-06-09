@@ -40,6 +40,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthGuard } from './guards/auth.gard';
 import { HoldableDirective } from './holdable.directive';
 import { AuthErrorHandler } from './helpers/auth-error-handler';
+import { RegisterComponent } from './register/register.component';
+import { RegistrationService } from './register/registration.service';
 
 registerLocaleData(localeNb, 'nb');
 
@@ -53,7 +55,8 @@ registerLocaleData(localeNb, 'nb');
 		LoginComponent,
 		RoundCreateComponent,
 		RoundListComponent,
-		HoldableDirective
+		HoldableDirective,
+		RegisterComponent
 	],
 	imports: [
 		ReactiveFormsModule,
@@ -91,6 +94,7 @@ registerLocaleData(localeNb, 'nb');
 		DatePipe,
 		AuthenticationService,
 		AuthGuard,
+		RegistrationService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
 	],
