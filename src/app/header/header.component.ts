@@ -23,9 +23,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   	constructor(private authService: AuthenticationService, private breakpointObserver: BreakpointObserver) { }
 
 	ngOnInit() {
+		if (this.authService.isTokenExpired()) {
+			this.authService.logout();
+			this.isLoggedIn = false;
+		} else {
+			this.isLoggedIn = true;
+		}
+
 		this.isLoggedInSub = this.authService.isLoggedInStatusUpdater()
 		.subscribe((isLoggedIn: boolean) => {
-			console.log(isLoggedIn);
 			this.isLoggedIn = isLoggedIn;
 		});
 	}

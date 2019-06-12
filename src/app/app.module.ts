@@ -42,6 +42,8 @@ import { HoldableDirective } from './holdable.directive';
 import { AuthErrorHandler } from './helpers/auth-error-handler';
 import { RegisterComponent } from './register/register.component';
 import { RegistrationService } from './register/registration.service';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileService } from './profile/profile.service';
 
 registerLocaleData(localeNb, 'nb');
 
@@ -56,7 +58,8 @@ registerLocaleData(localeNb, 'nb');
 		RoundCreateComponent,
 		RoundListComponent,
 		HoldableDirective,
-		RegisterComponent
+		RegisterComponent,
+		ProfileComponent
 	],
 	imports: [
 		ReactiveFormsModule,
@@ -95,6 +98,7 @@ registerLocaleData(localeNb, 'nb');
 		AuthenticationService,
 		AuthGuard,
 		RegistrationService,
+		ProfileService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
 	],

@@ -8,6 +8,10 @@
 		<a [routerLink]="['/rounds']" routerLinkActive="router-link-active" >Siste</a>
 	</span>
 
+	<span *ngIf="isLoggedIn" class="nav-item">
+		<a [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profil</a>
+	</span>
+
 	<span *ngIf="!isLoggedIn" class="nav-item">
 		<a [routerLink]="['/login']" routerLinkActive="router-link-active" >Logg inn</a>
 	</span>
@@ -29,6 +33,10 @@
 <div class="dropdown" [ngClass]="{ showDropdown: showDropdown }">
 	<span class="dropdown-nav-item">
 		<a [routerLink]="['/rounds']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Siste</a>
+	</span>
+
+	<span *ngIf="isLoggedIn" class="dropdown-nav-item">
+		<a [routerLink]="['/profile']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Profil</a>
 	</span>
 
 	<span *ngIf="!isLoggedIn" class="dropdown-nav-item">

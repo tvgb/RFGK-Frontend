@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -11,9 +11,8 @@ export class AuthenticationService {
 	apiEndpoint = environment.apiEndpoint;
 	private SESSION_STORAGE_VARIABLE = 'currentUser';
 	private jwtHelper = new JwtHelperService();
-	private isLoggedIn = false;
+	private isLoggedIn;
 	private isLoggedInUpdated = new Subject<boolean>();
-
 
 	constructor(private http: HttpClient) { }
 

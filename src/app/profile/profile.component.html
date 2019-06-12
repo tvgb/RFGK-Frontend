@@ -1,0 +1,40 @@
+<div id="profile-wrapper">
+	<h1>Profil</h1>
+	<form [formGroup]="profileForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+		<h3>Oppdater epostadresse</h3>
+		<mat-form-field [floatLabel]="'always'">
+			<mat-label appearance="legacy">Ny epostadresse</mat-label>
+			<input autocomplete="new-password" matInput type="text" formControlName="newEmail" >
+			<mat-error *ngIf="e() === 'email'">
+				Skriv inn en gyldig epostadresse.
+			</mat-error>
+			<mat-error *ngIf="e() === 'alreadyTaken'">
+				Epostadressen er allerede i bruk.
+			</mat-error>
+		</mat-form-field>
+
+		<h3>Oppdater passord</h3>
+		<mat-form-field [floatLabel]="'always'">
+			<mat-label for="newPassword">Nytt passord</mat-label>
+			<input matInput type="password" formControlName="newPassword" autocomplete="new-password" minlength="6"/>
+			<mat-error *ngIf="c()['newPassword'].invalid && c()['newPassword'].errors.minlength">
+				Passordet må minst ha 6 tegn.
+			</mat-error>
+		</mat-form-field>
+
+		<h3>Gammelt passord (påkrevd for å gjøre endringer)</h3>
+		<mat-form-field [floatLabel]="'always'">
+			<mat-label for="oldPassword">Gammelt passord</mat-label>
+			<input matInput type="password" autocomplete="new-password" formControlName="oldPassword"/>
+			<mat-error *ngIf="c()['oldPassword'].invalid && c()['oldPassword'].errors.wrongPassword">
+				Feil passord.
+			</mat-error>
+		</mat-form-field>
+
+		<div id="update-button-wrapper">
+			<button id="update-button" [disabled]="readyForSubmit()" mat-raised-button color="accent" type="submit">Oppdater</button>
+		</div>
+
+	</form>
+
+</div>
