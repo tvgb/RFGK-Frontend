@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -11,7 +11,8 @@ export class AuthenticationService {
 	apiEndpoint = environment.apiEndpoint;
 	private SESSION_STORAGE_VARIABLE = 'currentUser';
 	private jwtHelper = new JwtHelperService();
-
+	private isLoggedIn;
+	private isLoggedInUpdated = new Subject<boolean>();
 
 	constructor(private http: HttpClient) { }
 
@@ -26,6 +27,9 @@ export class AuthenticationService {
 						token: player.token,
 						player: player.player}
 					));
+
+					this.isLoggedIn = true;
+					this.isLoggedInUpdated.next(this.isLoggedIn);
 				}
 
 				return player;
@@ -35,6 +39,8 @@ export class AuthenticationService {
 	logout() {
 		// remove user from local storage to log user out
 		sessionStorage.removeItem('currentUser');
+		this.isLoggedIn = false;
+		this.isLoggedInUpdated.next(this.isLoggedIn);
 	}
 
 	getToken(): string {
@@ -52,5 +58,9 @@ export class AuthenticationService {
 
 	isAdmin(playerId: number): Observable<boolean> {
 		return this.http.get<boolean>(`${this.apiEndpoint}/players/${playerId}`);
+	}
+
+	isLoggedInStatusUpdater() {
+		return this.isLoggedInUpdated.asObservable();
 	}
 }

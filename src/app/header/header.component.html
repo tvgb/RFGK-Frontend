@@ -8,8 +8,16 @@
 		<a [routerLink]="['/rounds']" routerLinkActive="router-link-active" >Siste</a>
 	</span>
 
-	<span class="nav-item">
-		<a [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</a>
+	<span *ngIf="isLoggedIn" class="nav-item">
+		<a [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profil</a>
+	</span>
+
+	<span *ngIf="!isLoggedIn" class="nav-item">
+		<a [routerLink]="['/login']" routerLinkActive="router-link-active" >Logg inn</a>
+	</span>
+
+	<span *ngIf="isLoggedIn" (click)="logOut()" class="nav-item">
+		<a [routerLink]="['/login']" routerLinkActive="router-link-active" >Logg ut</a>
 	</span>
 
 	<button
@@ -27,7 +35,15 @@
 		<a [routerLink]="['/rounds']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Siste</a>
 	</span>
 
-	<span class="dropdown-nav-item">
-		<a [routerLink]="['/login']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Login</a>
+	<span *ngIf="isLoggedIn" class="dropdown-nav-item">
+		<a [routerLink]="['/profile']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Profil</a>
+	</span>
+
+	<span *ngIf="!isLoggedIn" class="dropdown-nav-item">
+		<a [routerLink]="['/login']" (click)="toggleDropdown()" routerLinkActive="router-link-active" >Logg inn</a>
+	</span>
+
+	<span *ngIf="isLoggedIn" class="dropdown-nav-item">
+		<a [routerLink]="['/login']" (click)="toggleDropdown()" (click)="logOut()" routerLinkActive="router-link-active" >Logg ut</a>
 	</span>
 </div>

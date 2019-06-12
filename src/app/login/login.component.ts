@@ -10,44 +10,62 @@ import { AuthenticationService } from './authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-	email = new FormControl('', [Validators.required, Validators.email]);
-	password = new FormControl('', [Validators.required]);
+	loginForm: FormGroup = this.formBuilder.group({
+		email: ['', Validators.required],
+		password: ['', [Validators.required]]
+	});
+
 	loading = false;
 	submitted = false;
 	returnUrl: string;
 
+
+
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private authenticationService: AuthenticationService) { }
+		private authenticationService: AuthenticationService,
+		private formBuilder: FormBuilder) { }
 
 	ngOnInit() {
 		// get return url from route parameters or default to '/'
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
 
-	onSubmit(loginForm: NgForm) {
-		console.log('Trying to log in ...');
-		this.submitted = true;
+	onSubmit(formDirective: NgForm) {
+		console.log(this.loginForm);
+		this.c()['email'].setErrors({'wrongEmailOrPassword': null});
+		this.c()['password'].setErrors({'wrongEmailOrPassword': null});
+		this.c()['email'].updateValueAndValidity();
+		this.c()['password'].updateValueAndValidity();
 
+		this.loginForm.updateValueAndValidity();
 		// stop here if form is invalid
-		if (loginForm.invalid) {
-			console.log('Ivalid form');
+		if (this.loginForm.invalid) {
 			return;
 		}
 
 		this.loading = true;
-		this.authenticationService.login(loginForm.value.email, loginForm.value.password)
+		this.authenticationService.login(this.c()['email'].value, this.c()['password'].value)
 			.pipe()
 			.subscribe(
 				data => {
+					if (data.responsecode) {
+						this.loading = false;
+						this.c()['password'].setErrors({'wrongEmailOrPassword': true});
+						this.c()['email'].setErrors({'wrongEmailOrPassword': true});
+						return;
+					}
+
 					this.router.navigate([this.returnUrl]);
-					console.log('You are logged in');
 				},
 				error => {
-					console.log(error(error));
 					this.loading = false;
 				}
 			);
+	}
+
+	c() {
+		return this.loginForm.controls;
 	}
 }

@@ -1,16 +1,19 @@
 <div id="login-wrapper">
 	<h1 class="mat-h1">Login</h1>
-	<form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
+	<form [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+
 		<mat-form-field appearance="outline">
 			<mat-label>Epost</mat-label>
-			<input matInput type="text" ngModel name="email" #email="ngModel" placeholder="ola@normann.no" required/>
-			<mat-error *ngIf="email.invalid">Skriv in epostadresse.</mat-error>
+			<input matInput type="text" formControlName="email" placeholder="ola@normann.no" required/>
+			<mat-error *ngIf="c()['email'].invalid && !c()['email'].errors.wrongEmailOrPassword">Skriv inn epostadresse.</mat-error>
+			<mat-error *ngIf="c()['email'].invalid && c()['email'].errors.wrongEmailOrPassword">Feil epost eller passord.</mat-error>
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">
 			<mat-label for="password">Passord</mat-label>
-			<input matInput type="password" ngModel name="password" #password="ngModel" placeholder="passord123456" required/>
-			<mat-error *ngIf="password.invalid">Skriv in passord.</mat-error>
+			<input matInput type="password" formControlName="password" placeholder="passord123456" required/>
+			<mat-error *ngIf="c()['password'].invalid && !c()['password'].errors.wrongEmailOrPassword">Skriv in passord.</mat-error>
+			<mat-error *ngIf="c()['password'].invalid && c()['password'].errors.wrongEmailOrPassword">Feil epost eller passord.</mat-error>
 		</mat-form-field>
 
 		<div id="login-button-wrapper">
