@@ -6,6 +6,7 @@ import { ScorecardCreateComponent } from './scorecard/scorecard-create/scorecard
 import { AuthGuard } from './guards/auth.gard';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ValuesliderComponent } from './scorecard/round/round-create/valueslider/valueslider.component';
 
 const routes: Routes = [
 	{
@@ -20,6 +21,8 @@ const routes: Routes = [
 		path: 'register', component: RegisterComponent
 	}, {
 		path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
+	}, {
+		path: 'vs', component: ValuesliderComponent
 	}
 ];
 

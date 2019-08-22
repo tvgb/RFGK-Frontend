@@ -44,6 +44,7 @@ import { RegisterComponent } from './register/register.component';
 import { RegistrationService } from './register/registration.service';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
+import { ValuesliderComponent } from './scorecard/round/round-create/valueslider/valueslider.component';
 
 registerLocaleData(localeNb, 'nb');
 
@@ -59,7 +60,8 @@ registerLocaleData(localeNb, 'nb');
 		RoundListComponent,
 		HoldableDirective,
 		RegisterComponent,
-		ProfileComponent
+		ProfileComponent,
+		ValuesliderComponent
 	],
 	imports: [
 		ReactiveFormsModule,
