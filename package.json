@@ -29,7 +29,7 @@
     "core-js": "^2.5.4",
     "datejs": "^1.0.0-rc3",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jwt-decode": "^2.2.0",
     "luxon": "^1.15.0",
     "moment": "^2.24.0",
