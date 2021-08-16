@@ -24,7 +24,6 @@ export class ScorecardService {
 	}
 
 	addScorecard(scorecard: IScorecard): Observable<IScorecard> {
-		console.log('Posting scorecard in service.');
 		return this.http.post<IScorecard>(`${this.apiEndpoint}/scorecard`, scorecard)
 		.pipe(
 			catchError(this.handleError)
