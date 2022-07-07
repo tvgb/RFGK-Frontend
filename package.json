@@ -32,7 +32,7 @@
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
     "luxon": "^1.15.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-pick-datetime": "^7.0.0",
     "ngx-material-timepicker": "^3.1.0",
     "ngx-tempusdominus-bootstrap": "^1.0.1",
